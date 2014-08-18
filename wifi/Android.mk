@@ -40,7 +40,14 @@ ifdef WIFI_EXT_MODULE_NAME
 LOCAL_CFLAGS += -DWIFI_EXT_MODULE_NAME=\"$(WIFI_EXT_MODULE_NAME)\"
 endif
 
+ifeq ($(BOARD_ENABLE_MARVELL_WIFI),true)
+LOCAL_CFLAGS += -DMARVELL_WIFI
+LOCAL_SHARED_LIBRARIES += libMarvellWireless
+LOCAL_C_INCLUDES += vendor/marvell/generic/libMarvellWireless
+LOCAL_SRC_FILES += wifi/wifi_mrvl.c
+else
 LOCAL_SRC_FILES += wifi/wifi.c
+endif
 
 ifeq ($(BOARD_HAVE_SAMSUNG_WIFI),true)
 LOCAL_CFLAGS += -DSAMSUNG_WIFI
